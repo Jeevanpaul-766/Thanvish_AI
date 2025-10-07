@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanātana Dharma Knowledge Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="om-symbol">ॐ</span>
+                <h1>Sanātana Dharma AI</h1>
+            </div>
+            <p class="tagline">AI-Powered Bhagavad-Gītā Knowledge Assistant</p>
+        </header>
+
+        <!-- Mode Selector -->
+        <div class="mode-selector">
+            <button class="mode-btn active" data-mode="scholar">
+                <span class="mode-icon">📚</span>
+                <span>Scholar Mode</span>
+            </button>
+            <button class="mode-btn" data-mode="child">
+                <span class="mode-icon">🎓</span>
+                <span>Child Mode</span>
+            </button>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="chat-container" id="chatContainer">
+            <!-- Welcome Message -->
+            <div class="message assistant-message">
+                <div class="message-avatar">🕉️</div>
+                <div class="message-content">
+                    <p>Namaste! 🙏</p>
+                    <p>I am your Sanātana Dharma Knowledge Assistant. Ask me anything about the Bhagavad-Gītā, Hindu philosophy, or spiritual wisdom.</p>
+                    <div class="example-questions">
+                        <p><strong>Example questions:</strong></p>
+                        <button class="example-btn" data-question="What is dharma in the Gita?">What is dharma?</button>
+                        <button class="example-btn" data-question="Explain karma yoga">Explain karma yoga</button>
+                        <button class="example-btn" data-question="Who is Krishna?">Who is Krishna?</button>
+                        <button class="example-btn" data-question="What does the Gita teach about meditation?">What about meditation?</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-container">
+            <div class="input-wrapper">
+                <textarea 
+                    id="messageInput" 
+                    placeholder="Ask about dharma, karma, yoga, or any Bhagavad-Gītā concept..."
+                    rows="1"
+                ></textarea>
+                <button id="sendBtn" class="send-btn">
+                    <span class="send-icon">➤</span>
+                </button>
+            </div>
+            <div class="input-footer">
+                <span class="powered-by">Powered by GPT-2 trained on Bhagavad-Gītā</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p>Contemplating your question...</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

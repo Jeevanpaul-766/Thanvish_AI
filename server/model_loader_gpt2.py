@@ -105,10 +105,17 @@ class SanatanaLLMGPT2:
             response = response.replace("Assistant:", "")
             response = response.replace("Answer:", "")
             
+            # Remove leading "?" if present
+            response = response.lstrip("? ").strip()
+            
             # Remove "Explain in" prefix if present
             if response.startswith("Explain in"):
                 parts = response.split(":", 1)
                 response = parts[1] if len(parts) > 1 else response
+            
+            # Remove "in Bhagavad-Gītā" at the start if standalone
+            if response.startswith("in Bhagavad-Gītā"):
+                response = response[len("in Bhagavad-Gītā"):].strip()
             
             # Clean formatting artifacts
             response = response.replace("READ MORE ›", "")
