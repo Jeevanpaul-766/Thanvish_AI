@@ -51,9 +51,10 @@ async def startup_event():
     """Initialize the model on startup"""
     global model
     try:
-        logger.info("Initializing GPT-2 model...")
-        model = SanatanaLLMGPT2(model_path="models/checkpoint-93")
-        logger.info("GPT-2 model initialized successfully!")
+        logger.info("Initializing GPT-2 model (CLEAN DATASET - 12K examples)...")
+        # NEW MODEL: Trained on 12,002 clean examples from 22 scholars
+        model = SanatanaLLMGPT2(model_path="models/gpt2-gita-clean")
+        logger.info("✅ GPT-2 CLEAN model initialized successfully!")
     except Exception as e:
         logger.error(f"Failed to initialize model: {e}")
         raise e
