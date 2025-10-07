@@ -52,11 +52,17 @@ class SanatanaLLMGPT2:
         try:
             start_time = time.time()
             
-            # Format prompt based on mode
+            # Format prompt to encourage focused, direct responses
             if mode == "child":
-                system_prompt = f"{prompt}"
+                system_prompt = f"Explain in simple words for a child: {prompt}\n\nAnswer:"
             else:
-                system_prompt = f"{prompt}"
+                # More specific prompt format matching training data
+                if "verse" in prompt.lower() and any(char.isdigit() for char in prompt):
+                    system_prompt = f"Explain {prompt}\n\n"
+                elif "what is" in prompt.lower() or "what does" in prompt.lower():
+                    system_prompt = f"{prompt}\n\nAccording to Bhagavad Gita,"
+                else:
+                    system_prompt = f"{prompt}\n\n"
             
             # Tokenize input
             inputs = self.tokenizer(
@@ -67,21 +73,21 @@ class SanatanaLLMGPT2:
                 max_length=100
             )
             
-            # Generate response
+            # Generate response - OPTIMIZED for concise, focused answers
             with torch.no_grad():
                 outputs = self.model.generate(
                     inputs.input_ids,
                     attention_mask=inputs.attention_mask,
-                    max_new_tokens=500,
-                    min_new_tokens=100,  # Force at least 100 new tokens
-                    temperature=0.9,
+                    max_new_tokens=150,       # Further reduced for conciseness
+                    min_new_tokens=20,        # Allow very brief answers
+                    temperature=0.6,          # Lower temp = more focused
                     do_sample=True,
                     pad_token_id=self.tokenizer.pad_token_id,
                     num_return_sequences=1,
-                    top_p=0.92,
-                    top_k=60,
-                    repetition_penalty=1.3,
-                    length_penalty=1.0
+                    top_p=0.85,               # More focused sampling
+                    top_k=40,                 # More selective
+                    repetition_penalty=1.15,  # Slight repetition penalty
+                    no_repeat_ngram_size=3    # Prevent 3-word repetitions
                 )
             
             # Decode response
@@ -148,12 +154,24 @@ class SanatanaLLMGPT2:
             # Remove excessive punctuation
             response = re.sub(r'[?.]{2,}', '.', response)
             
-            # Remove incomplete sentences at the end
-            # If ends with incomplete thought like "So you cannot understand this verse because it says nothing of form and action; like a batman sitting by his bedside,."
-            # Keep only complete, meaningful sentences
-            sentences = response.split('.')
-            if len(sentences) > 1 and len(sentences[-1].strip()) < 20:
-                response = '.'.join(sentences[:-1]) + '.'
+            # Smart truncation: Keep only coherent, complete sentences
+            sentences = [s.strip() for s in response.split('.') if s.strip()]
+            
+            # Remove very long rambling sentences (likely incoherent)
+            sentences = [s for s in sentences if len(s) < 300]
+            
+            # Keep only first 5-6 meaningful sentences for conciseness
+            if len(sentences) > 6:
+                sentences = sentences[:6]
+            
+            # Remove incomplete or very short sentences at the end
+            while sentences and len(sentences[-1]) < 20:
+                sentences.pop()
+            
+            # Reconstruct response
+            response = '. '.join(sentences)
+            if response and not response.endswith('.'):
+                response += '.'
             
             # Final cleanup
             response = response.strip()
