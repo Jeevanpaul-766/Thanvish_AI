@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Environment variables
+.env
+*.env
+
+# Model files (too large for git - use Git LFS or external storage)
+server/models/checkpoint-*/model.safetensors
+server/models/checkpoint-*/optimizer.pt
+server/models/checkpoint-*/scheduler.pt
+server/models/checkpoint-*/scaler.pt
+server/models/checkpoint-*/rng_state.pth
+server/models/model.safetensors
+
+# Large data files
+*.pdf
+*.zip
+
+# Temporary files
+*.tmp
+*.bak
