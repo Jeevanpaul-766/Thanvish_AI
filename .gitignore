@@ -33,12 +33,13 @@ desktop.ini
 *.env
 
 # Model files (too large for git - use Git LFS or external storage)
-server/models/checkpoint-*/model.safetensors
-server/models/checkpoint-*/optimizer.pt
-server/models/checkpoint-*/scheduler.pt
-server/models/checkpoint-*/scaler.pt
-server/models/checkpoint-*/rng_state.pth
-server/models/model.safetensors
+server/models/checkpoint-*/
+server/models/gpt2-gita-clean/
+server/models/*.safetensors
+server/models/*.pt
+server/models/*.pth
+*.safetensors
+*.bin
 
 # Large data files
 *.pdf
