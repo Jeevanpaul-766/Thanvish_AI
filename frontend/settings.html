@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings • Sanātana Dharma AI</title>
+    <link rel="stylesheet" href="auth/auth.css">
+</head>
+<body>
+    <div class="auth-wrap">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="om">ॐ</div>
+                <h1>Settings</h1>
+            </div>
+            <style>
+                .settings-grid { display:grid; gap:12px; }
+                .nav-row { display:flex; gap:8px; margin-top:12px; }
+                .section { margin-top:6px; padding:12px; border:1px solid rgba(255,255,255,0.06); border-radius:12px; background:#0f172a; }
+                .section-title { color:#e5e7eb; font-weight:600; margin-bottom:8px; }
+                .row { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:8px 0; }
+                .hint { color:#94a3b8; font-size:12px; }
+            </style>
+            <p class="auth-desc">Personalize your experience</p>
+            <div class="auth-form settings-grid">
+                <div class="section">
+                    <div class="section-title">General</div>
+                    <div class="row">
+                        <span>Theme <span class="hint">(appearance)</span></span>
+                        <select id="theme" class="auth-input" style="max-width:200px;">
+                            <option value="dark">Dark</option>
+                            <option value="light">Light</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <span>Default mode <span class="hint">(answer style)</span></span>
+                        <select id="defaultMode" class="auth-input" style="max-width:200px;">
+                            <option value="scholar">Scholar</option>
+                            <option value="child">Child</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <span>Language</span>
+                        <select id="language" class="auth-input" style="max-width:200px;">
+                            <option value="en">English</option>
+                            <option value="hi">Hindi</option>
+                            <option value="te">Telugu</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Chat</div>
+                    <label class="row">
+                        <span>Chat history <span class="hint">(save recent conversations)</span></span>
+                        <input id="historyEnabled" type="checkbox" class="auth-input" style="width:auto;">
+                    </label>
+                    <div class="row">
+                        <span>Message density</span>
+                        <select id="msgDensity" class="auth-input" style="max-width:200px;">
+                            <option value="comfortable">Comfortable</option>
+                            <option value="compact">Compact</option>
+                        </select>
+                    </div>
+                    <label class="row">
+                        <span>Show citations</span>
+                        <input id="showCitations" type="checkbox" class="auth-input" style="width:auto;">
+                    </label>
+                </div>
+                <div class="nav-row">
+                    <button id="saveBtn" class="auth-btn" type="button">Save</button>
+                    <a class="auth-btn" href="profile.html" style="text-align:center; text-decoration:none; display:inline-block;">Back</a>
+                </div>
+                <div class="auth-success" id="ok"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple local storage preferences
+        const themeSel = document.getElementById('theme');
+        const modeSel = document.getElementById('defaultMode');
+        const langSel = document.getElementById('language');
+        const historyChk = document.getElementById('historyEnabled');
+        const densitySel = document.getElementById('msgDensity');
+        const citationsChk = document.getElementById('showCitations');
+        const ok = document.getElementById('ok');
+        function loadPrefs(){
+            const t = localStorage.getItem('sd_theme') || 'dark';
+            const m = localStorage.getItem('sd_default_mode') || 'scholar';
+            const lang = localStorage.getItem('sd_language') || 'en';
+            const hist = localStorage.getItem('sd_history_enabled');
+            const dens = localStorage.getItem('sd_msg_density') || 'comfortable';
+            const cites = localStorage.getItem('sd_show_citations');
+            themeSel.value = t; 
+            modeSel.value = m;
+            langSel.value = lang;
+            historyChk.checked = hist !== 'false';
+            densitySel.value = dens;
+            citationsChk.checked = cites !== 'false';
+        }
+        loadPrefs();
+        document.getElementById('saveBtn').addEventListener('click', () => {
+            localStorage.setItem('sd_theme', themeSel.value);
+            localStorage.setItem('sd_default_mode', modeSel.value);
+            localStorage.setItem('sd_language', langSel.value);
+            localStorage.setItem('sd_history_enabled', historyChk.checked ? 'true' : 'false');
+            localStorage.setItem('sd_msg_density', densitySel.value);
+            localStorage.setItem('sd_show_citations', citationsChk.checked ? 'true' : 'false');
+            ok.textContent = 'Saved.';
+        });
+    </script>
+</body>
+</html>
+
+

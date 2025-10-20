@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up • Sanātana Dharma AI</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+    <div class="auth-wrap">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="om">ॐ</div>
+                <h1>Create account</h1>
+            </div>
+            <style>
+                .nav-row { display:flex; gap:8px; margin-top:12px; }
+            </style>
+            <p class="auth-desc">Join to explore Bhagavad-Gītā wisdom</p>
+            <div class="auth-error" id="error"></div>
+            <form class="auth-form" id="signupForm">
+                <input id="name" class="auth-input" type="text" placeholder="Full name" required>
+                <div style="display:flex; gap:8px;">
+                    <input id="age" class="auth-input" type="number" placeholder="Age" min="1" max="120" style="flex:0 0 120px;">
+                    <input id="dob" class="auth-input" type="date" placeholder="Date of birth" style="flex:1;">
+                </div>
+                <input id="phone" class="auth-input" type="tel" placeholder="Mobile number (optional)">
+                <input id="email" class="auth-input" type="email" placeholder="Email" required>
+                <input id="password" class="auth-input" type="password" placeholder="Password (min 6 chars)" minlength="6" required>
+                <button class="auth-btn" type="submit">Create account</button>
+            </form>
+            <div class="nav-row">
+                <span>Already have an account?</span>
+                <a class="auth-link" href="login.html">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        const form = document.getElementById('signupForm');
+        const err = document.getElementById('error');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            err.textContent = '';
+            const name = document.getElementById('name').value.trim();
+            const ageStr = document.getElementById('age').value.trim();
+            const dob = document.getElementById('dob').value;
+            const phone = document.getElementById('phone').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            try {
+                const user = await AuthAPI.signupEmail(email, password);
+                if (name) { await AuthAPI.setDisplayName(user, name); }
+                const age = ageStr ? parseInt(ageStr, 10) : null;
+                await AuthAPI.saveUserProfile(user.uid, {
+                    name: name || null,
+                    age: isNaN(age) ? null : age,
+                    dob: dob || null,
+                    email: email,
+                    phone: phone || null
+                });
+                window.location.href = '../index.html';
+            } catch (error) {
+                err.textContent = error.message || 'Signup failed';
+            }
+        });
+    </script>
+</body>
+</html>
+
+

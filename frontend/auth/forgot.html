@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset password • Sanātana Dharma AI</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+    <div class="auth-wrap">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="om">ॐ</div>
+                <h1>Reset password</h1>
+            </div>
+            <style>
+                .nav-row { display:flex; gap:8px; margin-top:12px; }
+            </style>
+            <p class="auth-desc">Enter your email and we'll send a reset link</p>
+            <div class="auth-error" id="error"></div>
+            <div class="auth-success" id="success"></div>
+            <form class="auth-form" id="resetForm">
+                <input id="email" class="auth-input" type="email" placeholder="Email" required>
+                <button class="auth-btn" type="submit">Send reset link</button>
+            </form>
+            <div class="nav-row">
+                <a class="auth-link" href="login.html">Back to login</a>
+                <a class="auth-link" href="signup.html">Create account</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        const form = document.getElementById('resetForm');
+        const err = document.getElementById('error');
+        const ok = document.getElementById('success');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            err.textContent = '';
+            ok.textContent = '';
+            const email = document.getElementById('email').value.trim();
+            try {
+                await AuthAPI.sendReset(email);
+                ok.textContent = 'Reset email sent. Check your inbox.';
+            } catch (error) {
+                err.textContent = error.message || 'Unable to send reset email';
+            }
+        });
+    </script>
+</body>
+</html>
+
+

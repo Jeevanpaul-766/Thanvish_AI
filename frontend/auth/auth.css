@@ -1,0 +1,19 @@
+/* Minimal dark auth styles, isolated from main app */
+* { box-sizing: border-box; }
+body { margin: 0; font-family: 'Poppins', sans-serif; background: #0f172a; color: #e5e7eb; }
+.auth-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+.auth-card { width: 100%; max-width: 420px; background: #0b1220; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 24px; }
+.auth-header { text-align: center; margin-bottom: 16px; }
+.auth-header .om { font-size: 28px; display: inline-block; margin-bottom: 6px; }
+.auth-header h1 { font-size: 18px; margin: 0; }
+.auth-desc { text-align: center; font-size: 12px; color: #94a3b8; margin-bottom: 16px; }
+.auth-form { display: grid; gap: 12px; }
+.auth-input { width: 100%; padding: 12px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); background: #0f172a; color: #e5e7eb; }
+.auth-input:focus { outline: none; border-color: rgba(255,255,255,0.16); }
+.auth-btn { width: 100%; padding: 12px; border-radius: 12px; background: #1f2937; color: #e5e7eb; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; }
+.auth-btn:hover { background: #273244; }
+.auth-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+.auth-link { color: #93c5fd; text-decoration: none; }
+.auth-error { color: #fca5a5; font-size: 12px; min-height: 16px; }
+.auth-success { color: #86efac; font-size: 12px; min-height: 16px; }
+

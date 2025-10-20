@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help • Sanātana Dharma AI</title>
+    <link rel="stylesheet" href="auth/auth.css">
+</head>
+<body>
+    <div class="auth-wrap">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="om">ॐ</div>
+                <h1>Help</h1>
+            </div>
+            <style>
+                .qa { display:grid; gap:10px; }
+                .qa-item { background:#0f172a; border:1px solid rgba(255,255,255,0.06); border-radius:12px; padding:12px; }
+                .qa-q { color:#e5e7eb; font-weight:600; margin-bottom:6px; }
+                .qa-a { color:#cbd5e1; font-size:13px; }
+                .nav-row { display:flex; gap:8px; margin-top:12px; }
+                .two-col { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+                @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
+            </style>
+            <div class="auth-form">
+                <p class="auth-desc">Common questions</p>
+                <div class="qa two-col">
+                    <div class="qa-item">
+                        <div class="qa-q">How do I get better answers?</div>
+                        <div class="qa-a">Ask specific questions and include the topic or verse if possible. Example: "Explain Karma Yoga in Chapter 3".</div>
+                    </div>
+                    <div class="qa-item">
+                        <div class="qa-q">What are the modes for?</div>
+                        <div class="qa-a">Use <strong>Scholar</strong> for detailed explanations, <strong>Child</strong> for simpler language.</div>
+                    </div>
+                    <div class="qa-item">
+                        <div class="qa-q">Where are my chats stored?</div>
+                        <div class="qa-a">Chats are saved privately to your Firebase user account under Recent. They sync across devices.</div>
+                    </div>
+                    <div class="qa-item">
+                        <div class="qa-q">How do I delete a conversation?</div>
+                        <div class="qa-a">Open the ⋯ menu next to a recent chat and choose Delete. You’ll be asked to confirm.</div>
+                    </div>
+                    <div class="qa-item">
+                        <div class="qa-q">How do I reset my password?</div>
+                        <div class="qa-a">Go to Login → Forgot password, enter your email, and follow the link sent to you.</div>
+                    </div>
+                    <div class="qa-item">
+                        <div class="qa-q">I see “API error”. What should I do?</div>
+                        <div class="qa-a">Make sure the backend is running on port 8000 or try again in a moment. If the issue persists, refresh the page.</div>
+                    </div>
+                </div>
+                <div class="qa" style="margin-top:10px;">
+                    <div class="qa-item">
+                        <div class="qa-q">Shortcuts</div>
+                        <div class="qa-a">
+                            <ul style="margin-left:18px;">
+                                <li><strong>Enter</strong> to send • <strong>Shift+Enter</strong> for a new line</li>
+                                <li><strong>+ New chat</strong> starts a fresh conversation</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="qa-item">
+                        <div class="qa-q">Need more help?</div>
+                        <div class="qa-a">Check Settings for preferences or revisit About to learn how the app works.</div>
+                    </div>
+                </div>
+                <div class="nav-row">
+                    <a class="auth-btn" href="index.html" style="text-align:center; text-decoration:none; display:inline-block;">Chat</a>
+                    <a class="auth-btn" href="profile.html" style="text-align:center; text-decoration:none; display:inline-block;">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

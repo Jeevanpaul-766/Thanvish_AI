@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile • Sanātana Dharma AI</title>
+    <link rel="stylesheet" href="auth/auth.css">
+</head>
+<body>
+    <div class="auth-wrap">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="om">ॐ</div>
+                <h1>Your Profile</h1>
+            </div>
+            <p class="auth-desc">View and update your details</p>
+            <style>
+                .profile-hero { display:flex; align-items:center; gap:14px; background:#0f172a; border:1px solid rgba(255,255,255,0.06); border-radius:12px; padding:14px; margin-bottom:12px; }
+                .avatar-lg { width:56px; height:56px; border-radius:50%; background: linear-gradient(135deg,#1f2937,#334155); display:flex; align-items:center; justify-content:center; font-weight:600; color:#e5e7eb; font-size:20px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08); }
+                .hero-text { display:flex; flex-direction:column; line-height:1.2; }
+                .hero-name { font-size:16px; color:#e5e7eb; }
+                .hero-email { font-size:12px; color:#94a3b8; }
+                .quick-actions { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:10px; margin-bottom:14px; }
+                .action-card { background:#0f172a; border:1px solid rgba(255,255,255,0.06); border-radius:12px; padding:12px; display:flex; align-items:center; justify-content:space-between; text-decoration:none; color:#e5e7eb; transition:transform .12s ease, background .12s ease; }
+                .action-card:hover { transform: translateY(-2px); background:#0b1220; }
+                .action-title { font-size:13px; }
+                .action-sub { font-size:11px; color:#94a3b8; }
+                .action-icon { width:28px; height:28px; border-radius:10px; background:#111827; display:flex; align-items:center; justify-content:center; font-size:14px; border:1px solid rgba(255,255,255,0.06); }
+                .form-grid { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+                .form-grid .span-2 { grid-column: span 2; }
+                @media (max-width: 520px) { .quick-actions { grid-template-columns: 1fr; } .form-grid { grid-template-columns: 1fr; } }
+            </style>
+            <div class="profile-hero">
+                <div id="phAvatar" class="avatar-lg">U</div>
+                <div class="hero-text">
+                    <div id="phName" class="hero-name">Your name</div>
+                    <div id="phEmail" class="hero-email"></div>
+                </div>
+            </div>
+            <div class="quick-actions">
+                <a class="action-card" href="settings.html">
+                    <div>
+                        <div class="action-title">Settings</div>
+                        <div class="action-sub">Theme, defaults</div>
+                    </div>
+                    <div class="action-icon">⚙️</div>
+                </a>
+                <a class="action-card" href="recommended.html">
+                    <div>
+                        <div class="action-title">Recommended plan</div>
+                        <div class="action-sub">Weekly study track</div>
+                    </div>
+                    <div class="action-icon">🗓️</div>
+                </a>
+                <a class="action-card" href="help.html">
+                    <div>
+                        <div class="action-title">Help</div>
+                        <div class="action-sub">Tips and guidance</div>
+                    </div>
+                    <div class="action-icon">❓</div>
+                </a>
+                <a class="action-card" href="about.html">
+                    <div>
+                        <div class="action-title">About</div>
+                        <div class="action-sub">App info</div>
+                    </div>
+                    <div class="action-icon">ℹ️</div>
+                </a>
+            </div>
+            <div class="auth-error" id="error"></div>
+            <div class="auth-success" id="success"></div>
+            <form class="auth-form form-grid" id="profileForm">
+                <input id="name" class="auth-input span-2" type="text" placeholder="Full name">
+                <input id="age" class="auth-input" type="number" placeholder="Age" min="1" max="120">
+                <input id="dob" class="auth-input" type="date" placeholder="Date of birth">
+                <input id="phone" class="auth-input" type="tel" placeholder="Mobile number">
+                <input id="email" class="auth-input" type="email" placeholder="Email" disabled>
+                <div class="span-2" style="display:flex; gap:8px;">
+                    <button class="auth-btn" type="submit">Save changes</button>
+                    <a class="auth-btn" href="index.html" style="text-align:center; text-decoration:none; display:inline-block;">Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="auth/firebase-config.js"></script>
+    <script src="auth/auth.js"></script>
+    <script>
+        (async function(){
+            const err = document.getElementById('error');
+            const ok = document.getElementById('success');
+            try {
+                await AuthAPI.ensureReady();
+                const { onAuthStateChanged } = window.firebaseAuthModule;
+                onAuthStateChanged(window.firebaseAuth, async (user) => {
+                    if (!user) {
+                        window.location.replace('auth/login.html');
+                        return;
+                    }
+                    document.getElementById('email').value = user.email || '';
+                    document.getElementById('name').value = user.displayName || '';
+                    document.getElementById('phEmail').textContent = user.email || '';
+                    document.getElementById('phName').textContent = user.displayName || 'Your name';
+                    document.getElementById('phAvatar').textContent = (user.displayName && user.displayName[0]) ? user.displayName[0].toUpperCase() : 'U';
+                    const profile = await AuthAPI.getUserProfile(user.uid);
+                    if (profile) {
+                        if (profile.name) document.getElementById('name').value = profile.name;
+                        if (profile.name) {
+                            document.getElementById('phName').textContent = profile.name;
+                            document.getElementById('phAvatar').textContent = profile.name[0].toUpperCase();
+                        }
+                        if (profile.age != null) document.getElementById('age').value = profile.age;
+                        if (profile.dob) document.getElementById('dob').value = profile.dob;
+                        if (profile.phone) document.getElementById('phone').value = profile.phone;
+                    }
+                    const form = document.getElementById('profileForm');
+                    form.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+                        err.textContent = '';
+                        ok.textContent = '';
+                        const updates = {
+                            name: document.getElementById('name').value.trim() || null,
+                            age: (function(){ const v = document.getElementById('age').value.trim(); const n = parseInt(v,10); return isNaN(n)? null : n; })(),
+                            dob: document.getElementById('dob').value || null,
+                            phone: document.getElementById('phone').value.trim() || null
+                        };
+                        try {
+                            await AuthAPI.updateUserProfile(user.uid, updates);
+                            if (updates.name) { await AuthAPI.setDisplayName(user, updates.name); }
+                            ok.textContent = 'Profile updated.';
+                        } catch (e) {
+                            err.textContent = e.message || 'Update failed';
+                        }
+                    });
+                });
+            } catch (e) {
+                err.textContent = e.message || 'Unable to load profile';
+            }
+        })();
+    </script>
+</body>
+</html>
+
+

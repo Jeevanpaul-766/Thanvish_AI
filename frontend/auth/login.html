@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login • Sanātana Dharma AI</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+    <div class="auth-wrap">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="om">ॐ</div>
+                <h1>Welcome back</h1>
+            </div>
+            <style>
+                .nav-row { display:flex; gap:8px; margin-top:12px; }
+            </style>
+            <p class="auth-desc">Login to continue your conversation</p>
+            <div class="auth-error" id="error"></div>
+            <form class="auth-form" id="loginForm">
+                <input id="email" class="auth-input" type="email" placeholder="Email" required>
+                <input id="password" class="auth-input" type="password" placeholder="Password" required>
+                <button class="auth-btn" type="submit">Login</button>
+            </form>
+            <div class="nav-row">
+                <a class="auth-link" href="forgot.html">Forgot password?</a>
+                <a class="auth-link" href="signup.html">Create account</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        const form = document.getElementById('loginForm');
+        const err = document.getElementById('error');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            err.textContent = '';
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            try {
+                await AuthAPI.loginEmail(email, password);
+                window.location.href = '../index.html';
+            } catch (error) {
+                err.textContent = error.message || 'Login failed';
+            }
+        });
+    </script>
+</body>
+</html>
+
+

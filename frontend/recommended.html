@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommended plan • Sanātana Dharma AI</title>
+    <link rel="stylesheet" href="auth/auth.css">
+</head>
+<body>
+    <div class="auth-wrap">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="om">ॐ</div>
+                <h1>Recommended plan for you</h1>
+            </div>
+            <style>
+                .plan-card { background:#0f172a; border:1px solid rgba(255,255,255,0.06); border-radius:12px; padding:12px; margin-bottom:10px; }
+                .plan-title { color:#e5e7eb; font-weight:600; margin-bottom:6px; }
+                .nav-row { display:flex; gap:8px; margin-top:12px; }
+                .pricing { display:grid; gap:12px; margin-top:6px; }
+                .pricing-tiles { display:grid; grid-template-columns: 1fr; gap:14px; }
+                .tile { background:#0b1220; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:18px; display:flex; flex-direction:column; justify-content:space-between; transition: transform .12s ease, background .12s ease, border-color .12s ease; max-width: 720px; margin: 0 auto; }
+                .tile:hover { transform: translateY(-2px); background:#0f1424; border-color: rgba(255,255,255,0.12); }
+                .tile.best { border-color:#3b82f6; box-shadow: 0 0 0 1px rgba(59,130,246,.25) inset; }
+                .tile-head { display:flex; align-items:center; justify-content:space-between; }
+                .t-name { color:#e5e7eb; font-weight:700; letter-spacing:.2px; }
+                .t-badge { padding:4px 8px; border-radius:999px; background:#111827; border:1px solid rgba(255,255,255,0.12); color:#93c5fd; font-size:11px; }
+                .t-price { color:#e5e7eb; font-size:24px; font-weight:700; margin:6px 0; }
+                .t-per { color:#94a3b8; font-size:12px; }
+                .t-feat { margin:10px 0 12px 0; color:#cbd5e1; font-size:13px; list-style:none; padding-left:0; }
+                .t-feat li { display:flex; gap:8px; align-items:flex-start; margin:6px 0; }
+                .t-feat li:before { content:"✔"; color:#22c55e; font-size:12px; margin-top:2px; }
+                .t-cta { display:flex; gap:8px; margin-top:auto; }
+                .t-btn { flex:1; text-align:center; text-decoration:none; display:inline-block; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.12); color:#e5e7eb; background:#111827; }
+                .t-btn.primary { background:#1f2937; border-color:#2563eb; }
+                @media (min-width: 1200px) { .pricing-tiles { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+                @media (min-width: 1600px) { .pricing-tiles { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+            </style>
+            <p class="auth-desc">A simple weekly study and practice plan</p>
+            <div class="auth-form">
+                <div class="plan-card">
+                    <div class="plan-title">Daily</div>
+                    <ul style="margin:8px 0 0 18px; color:#cbd5e1;">
+                        <li>5–10 minutes Gītā verses review</li>
+                        <li>5 minutes quiet reflection/meditation</li>
+                    </ul>
+                </div>
+                <div class="plan-card">
+                    <div class="plan-title">Weekly</div>
+                    <ul style="margin:8px 0 0 18px; color:#cbd5e1;">
+                        <li>Read one theme (e.g., Karma Yoga)</li>
+                        <li>Ask the AI two questions and summarize learnings</li>
+                    </ul>
+                </div>
+                <div class="plan-card pricing">
+                    <div class="plan-title">Plans (like ChatGPT style)</div>
+                    <div class="pricing-tiles">
+                        <div class="tile">
+                            <div>
+                                <div class="tile-head"><div class="t-name">Free</div></div>
+                                <div class="t-price">$0</div>
+                                <div class="t-per">Basic chat • Community model</div>
+                                <ul class="t-feat">
+                                    <li>Standard response speed</li>
+                                    <li>Core Bhagavad‑Gītā Q&A</li>
+                                    <li>Recent chats sync</li>
+                                </ul>
+                            </div>
+                            <div class="t-cta">
+                                <a class="t-btn primary" href="index.html">Start free</a>
+                            </div>
+                        </div>
+                        <div class="tile best">
+                            <div>
+                                <div class="tile-head"><div class="t-name">Plus</div><span class="t-badge">Most popular</span></div>
+                                <div class="t-price">$10</div>
+                                <div class="t-per">per month • Faster & smarter</div>
+                                <ul class="t-feat">
+                                    <li>Priority response speed</li>
+                                    <li>Expanded context for answers</li>
+                                    <li>Verse citations preview</li>
+                                </ul>
+                            </div>
+                            <div class="t-cta">
+                                <a class="t-btn primary" href="signup.html">Upgrade</a>
+                            </div>
+                        </div>
+                        <div class="tile">
+                            <div>
+                                <div class="tile-head"><div class="t-name">Family</div></div>
+                                <div class="t-price">$20</div>
+                                <div class="t-per">per month • 4 members</div>
+                                <ul class="t-feat">
+                                    <li>All Plus features</li>
+                                    <li>Up to 4 family profiles</li>
+                                    <li>Child-friendly summaries</li>
+                                </ul>
+                            </div>
+                            <div class="t-cta">
+                                <a class="t-btn" href="signup.html">Get Family</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-row">
+                    <a class="auth-btn" href="profile.html" style="text-align:center; text-decoration:none; display:inline-block;">Back</a>
+                    <a class="auth-btn" href="index.html" style="text-align:center; text-decoration:none; display:inline-block;">Start chatting</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
